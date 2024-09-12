@@ -3,5 +3,8 @@
 
 int main() 
 {
-    num_test();
+    printf("main..\n"); 
+    test_convert_num();
+    
+    return 0;
 }

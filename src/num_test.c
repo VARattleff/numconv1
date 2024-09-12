@@ -1,7 +1,23 @@
 #include <stdio.h>
+#include "convert_num.h"
 
-int num_test() 
+void handle_test_dec_to_int();
+
+int test_convert_num()
 {
-    printf("main_ish...\n");
-    return 0;
+    handle_test_dec_to_int();
+    return 0;    
+}
+
+void handle_test_dec_to_int()
+{
+    char *str[] = {"-1234", "1234"};
+    int position = 0;
+
+    while (position < 2)
+    {
+        int val = dec_to_int(str[position]);  
+        printf("%s -> %d\n", str[position], val);
+        position++;
+    };
 }

@@ -1,7 +1,20 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-int main_two() 
+
+int dec_to_int( char str[] )
 {
-    printf("2\n");
-    return 0;
+    int value = 0;
+    int position = (str[0] == '-') ? 1 : 0;  
+    bool negative = (str[0] == '-');  
+
+    while (str[position] != '\0')
+    {
+        value *=10;
+        int digit = str[position++] - '0';
+        value +=digit;
+    }
+
+    return negative ? -value : value;
 }
+
