@@ -19,15 +19,11 @@ int test_convert_num()
 
 void handle_test_dec_to_int()
 {
-    char *str[] = {"-1234", "1234"};
-    int position = 0;
+    char str[] = "12sdfsdfsdf3d4"; 
+    
+    int val = dec_to_int(str);  
+    printf("%s -> %d\n", str, val);
 
-    while (position < 2)
-    {
-        int val = dec_to_int(str[position]);  
-        printf("%s -> %d\n", str[position], val);
-        position++;
-    };
 }
 
 void handle_test_bin_to_int()
