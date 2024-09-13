@@ -32,6 +32,11 @@ bool is_hex_digit(char c)
     return valid_input;
 }
 
+bool is_oct_digit(char c)
+{
+    return (c >= '0') ? (c <= '7'): false;
+}
+
 int dec_to_int( char str[] )
 {
     int value = 0;
@@ -150,6 +155,35 @@ int hex_to_int(char str[])
             valid_input = false;
             break;
         }
+    }
+
+    negative ? -value : value;
+
+    return valid_input ? value : 0;
+}
+
+int oct_to_int( char str[] ) 
+{
+
+    int value = 0;
+    int position = (str[0] == '-') ? 1 : 0;  
+    bool negative = (str[0] == '-');  
+    bool valid_input = true;
+
+    while (str[position] != '\0')
+    {
+        if(is_oct_digit(str[position]))
+        {
+            value *=8;
+            int digit = str[position++] - '0';
+            value +=digit;    
+        } else
+        {
+            printf(RED "invalid input will default to 0\n" RESET_COLOR);
+            valid_input = false;
+            break;
+        }
+        
     }
 
     negative ? -value : value;
