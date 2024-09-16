@@ -190,3 +190,35 @@ int oct_to_int( char str[] )
 
     return valid_input ? value : 0;
 }
+
+void int_to_dec( int num, char str[] )
+{
+    int position = 0;
+    bool negative = false;
+
+    if (num < 0)
+    {
+        negative = true;
+        num = -num;
+    }
+
+    while (num > 0)
+    {
+        str[position++] = num % 10 + '0';
+        num /= 10;
+    }
+
+    if (negative)
+    {
+        str[position++] = '-';
+    }
+
+    str[position] = '\0';
+
+    for (int i = 0; i < position / 2; i++)
+    {
+        char temp = str[i];
+        str[i] = str[position - i - 1];
+        str[position - i - 1] = temp;
+    }
+}
