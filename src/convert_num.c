@@ -222,3 +222,16 @@ void int_to_dec( int num, char str[] )
         str[position - i - 1] = temp;
     }
 }
+
+void int_to_bin(int num, char str[]) {
+    //TODO: find ud af hvorfor minus ikke virker
+    int i;
+    unsigned int u_num = (unsigned int)num;  
+
+    for (i = 31; i >= 0; i--) {
+        str[i] = (u_num % 2) + '0';  
+        u_num = u_num / 2;  
+    }
+
+    str[32] = '\0';  
+}
