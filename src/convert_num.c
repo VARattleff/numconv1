@@ -223,15 +223,93 @@ void int_to_dec( int num, char str[] )
     }
 }
 
-void int_to_bin(int num, char str[]) {
+void int_to_bin(int num, char str[])
+{
     //TODO: find ud af hvorfor minus ikke virker
     int i;
     unsigned int u_num = (unsigned int)num;  
 
-    for (i = 31; i >= 0; i--) {
+    for (i = 31; i >= 0; i--) 
+    {
         str[i] = (u_num % 2) + '0';  
         u_num = u_num / 2;  
     }
 
     str[32] = '\0';  
+}
+
+void int_to_hex( int num, char str[] )
+{
+    int position = 0;
+    bool negative = false;
+
+    if (num < 0)
+    {
+        negative = true;
+        num = -num;
+    }
+
+    while (num > 0)
+    {
+        int remainder = num % 16;
+
+        if (remainder < 10)
+        {
+            str[position++] = remainder + '0';
+        }
+        else
+        {
+            str[position++] = remainder - 10 + 'A';
+        }
+
+        num /= 16;
+    }
+
+    if (negative)
+    {
+        str[position++] = '-';
+    }
+
+    str[position] = '\0';
+
+    for (int i = 0; i < position / 2; i++)
+    {
+        char temp = str[i];
+        str[i] = str[position - i - 1];
+        str[position - i - 1] = temp;
+    }
+
+}
+
+void int_to_oct( int num, char str[] )
+{
+    //TODO: find ud af hvorfor minus ikke virker
+    int position = 0;
+    bool negative = false;
+
+    if (num < 0)
+    {
+        negative = true;
+        num = -num;
+    }
+
+    while (num > 0)
+    {
+        str[position++] = num % 8 + '0';
+        num /= 8;
+    }
+
+    if (negative)
+    {
+        str[position++] = '-';
+    }
+
+    str[position] = '\0';
+
+    for (int i = 0; i < position / 2; i++)
+    {
+        char temp = str[i];
+        str[i] = str[position - i - 1];
+        str[position - i - 1] = temp;
+    }
 }
