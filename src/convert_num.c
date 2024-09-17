@@ -37,156 +37,184 @@ bool is_oct_digit(char c)
     return (c >= '0') ? (c <= '7'): false;
 }
 
-int dec_to_int( char str[] )
+int dec_to_int(char str[]) 
 {
     int value = 0;
-    int position = (str[0] == '-') ? 1 : 0;  
-    bool negative = (str[0] == '-');  
+    int position = 0;
+    bool negative = false;
     bool valid_input = true;
 
-    while (str[position] != '\0')
+    if (str[0] == '-') 
     {
-        if(is_digit(str[position]))
+        negative = true;
+        position = 1;
+    }
+
+    while (valid_input) 
+    {
+        char current_char = str[position];
+
+        if (current_char == '\0') 
         {
-            value *=10;
-            int digit = str[position++] - '0';
-            value +=digit;    
-        } else
-        {
-            printf(RED "invalid input will default to 0\n" RESET_COLOR);
-            valid_input = false;
             break;
         }
         
+        if (current_char == '\n') 
+        {
+            break;
+        }
+
+        if (is_digit(current_char)) 
+        {
+            value *= 10;
+            int digit = current_char - '0';
+            value += digit;
+            position++;
+        } else 
+        {
+            printf(RED "Invalid input, will default to 0\n" RESET_COLOR);
+            valid_input = false;
+        }
     }
 
-    negative ? -value : value;
-
+    if (negative) 
+    {
+        value = -value;
+    }
+    
     return valid_input ? value : 0;
 }
 
-int bin_to_int( char str[] )
+int bin_to_int(char str[]) 
 {
     int value = 0;
-    int position = (str[0] == '-') ? 1 : 0;  
-    bool negative = (str[0] == '-');  
+    int position = 0;  
+    bool negative = false;
     bool valid_input = true;
 
-    while (str[position] != '\0')
+    if (str[0] == '-') 
     {
-        if(is_bin_digit(str[position]))
+        negative = true;
+        position = 1;
+    }
+
+    while (valid_input) 
+    {
+        char current_char = str[position];
+
+        if (current_char == '\0' || current_char == '\n') 
+        {
+            break;
+        }
+
+        if (is_bin_digit(current_char)) 
         {   
-            value *=2;
-            int digit = str[position++] - '0';
-            value +=digit;
-        } else
+            value = value * 2;  
+            value = value + (current_char - '0');  
+            position++;
+        } else 
         {
-            printf(RED "invalid input will default to 0\n" RESET_COLOR);
+            printf(RED "Invalid input, will default to 0\n" RESET_COLOR);
             valid_input = false;
-            break;   
         }
     }
 
-    negative ? -value : value;
+    if (negative) 
+    {
+        value = -value;
+    }
 
     return valid_input ? value : 0;
 }
 
-int hex_to_int(char str[])
-{
+int hex_to_int(char str[]) {
     int value = 0;
-    int position = (str[0] == '-') ? 1 : 0;  
-    bool negative = (str[0] == '-');         
+    int position = 0;
+    bool negative = false;
     bool valid_input = true;
 
-    while (str[position] != '\0')
+    if (str[0] == '-') 
     {
-        char current_char = str[position++];
+        negative = true;
+        position = 1;
+    }
 
-        if (is_hex_digit(current_char))
+    while (valid_input) 
+    {
+        char current_char = str[position];
+
+        if (current_char == '\0' || current_char == '\n') 
         {
-            value *= 16;  
-            
-            if (current_char >= '0')
-            {
-                if (current_char <= '9')
-                {
-                    value += current_char - '0';  
-                }
-                else if (current_char >= 'A')
-                {
-                    if (current_char <= 'F')
-                    {
-                        value += current_char - 'A' + 10;  
-                    }
-                    else if (current_char >= 'a')
-                    {
-                        if (current_char <= 'f')
-                        {
-                            value += current_char - 'a' + 10;  
-                        }
-                        else
-                        {
-                            valid_input = false;  
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        valid_input = false;  
-                        break;
-                    }
-                }
-                else
-                {
-                    valid_input = false;  
-                    break;
-                }
-            }
-            else
-            {
-                valid_input = false;  
-                break;
-            }
-        }
-        else
-        {
-            printf("Invalid input, will default to 0\n");
-            valid_input = false;
             break;
+        }
+
+        if (is_hex_digit(current_char)) 
+        {
+            value = value * 16;
+            if (current_char >= '0' && current_char <= '9') 
+            {
+                value = value + (current_char - '0');
+            } else if (current_char >= 'A' && current_char <= 'F') 
+            {
+                value = value + (current_char - 'A' + 10);
+            } else if (current_char >= 'a' && current_char <= 'f') 
+            {
+                value = value + (current_char - 'a' + 10);
+            }
+            position++;
+        } else 
+        {
+            printf(RED "Invalid input, will default to 0\n" RESET_COLOR);
+            valid_input = false;
         }
     }
 
-    negative ? -value : value;
+    if (negative) 
+    {
+        value = -value;
+    }
 
     return valid_input ? value : 0;
 }
 
-int oct_to_int( char str[] ) 
+int oct_to_int(char str[]) 
 {
-
     int value = 0;
-    int position = (str[0] == '-') ? 1 : 0;  
-    bool negative = (str[0] == '-');  
+    int position = 0;  
+    bool negative = false;
     bool valid_input = true;
 
-    while (str[position] != '\0')
+    if (str[0] == '-') 
     {
-        if(is_oct_digit(str[position]))
-        {
-            value *=8;
-            int digit = str[position++] - '0';
-            value +=digit;    
-        } else
-        {
-            printf(RED "invalid input will default to 0\n" RESET_COLOR);
-            valid_input = false;
-            break;
-        }
-        
+        negative = true;
+        position = 1;
     }
 
-    negative ? -value : value;
+    while (valid_input) 
+    {
+        char current_char = str[position];
+
+        if (current_char == '\0' || current_char == '\n') 
+        {
+            break;
+        }
+
+        if (is_oct_digit(current_char)) 
+        {
+            value = value * 8;
+            value = value + (current_char - '0');
+            position++;
+        } else 
+        {
+            printf(RED "Invalid input, will default to 0\n" RESET_COLOR);
+            valid_input = false;
+        }
+    }
+
+    if (negative) 
+    {
+        value = -value;
+    }
 
     return valid_input ? value : 0;
 }
