@@ -102,7 +102,13 @@ int bin_to_int(char str[])
     {
         char current_char = str[position];
 
-        if (current_char == '\0' || current_char == '\n') 
+        if (current_char == '\0') 
+        {
+            break;
+        }
+
+
+        if (current_char == '\n') 
         {
             break;
         }
@@ -112,7 +118,8 @@ int bin_to_int(char str[])
             value = value * 2;  
             value = value + (current_char - '0');  
             position++;
-        } else 
+        } 
+        else 
         {
             printf(RED "Invalid input, will default to 0\n" RESET_COLOR);
             valid_input = false;
@@ -127,7 +134,8 @@ int bin_to_int(char str[])
     return valid_input ? value : 0;
 }
 
-int hex_to_int(char str[]) {
+int hex_to_int(char str[]) 
+{
     int value = 0;
     int position = 0;
     bool negative = false;
@@ -143,7 +151,12 @@ int hex_to_int(char str[]) {
     {
         char current_char = str[position];
 
-        if (current_char == '\0' || current_char == '\n') 
+        if (current_char == '\0') 
+        {
+            break;
+        }
+
+        if (current_char == '\n') 
         {
             break;
         }
@@ -151,18 +164,38 @@ int hex_to_int(char str[]) {
         if (is_hex_digit(current_char)) 
         {
             value = value * 16;
-            if (current_char >= '0' && current_char <= '9') 
+
+            if (current_char >= '0') 
             {
-                value = value + (current_char - '0');
-            } else if (current_char >= 'A' && current_char <= 'F') 
-            {
-                value = value + (current_char - 'A' + 10);
-            } else if (current_char >= 'a' && current_char <= 'f') 
-            {
-                value = value + (current_char - 'a' + 10);
+                if (current_char <= '9') 
+                {
+                    value = value + (current_char - '0');
+                } 
+                else 
+                {
+                    if (current_char >= 'A') 
+                    {
+                        if (current_char <= 'F') 
+                        {
+                            value = value + (current_char - 'A' + 10);
+                        } 
+                        else 
+                        {
+                            if (current_char >= 'a') 
+                            {
+                                if (current_char <= 'f') 
+                                {
+                                    value = value + (current_char - 'a' + 10);
+                                }
+                            }
+                        }
+                    }
+                }
             }
+
             position++;
-        } else 
+        } 
+        else 
         {
             printf(RED "Invalid input, will default to 0\n" RESET_COLOR);
             valid_input = false;
@@ -194,7 +227,12 @@ int oct_to_int(char str[])
     {
         char current_char = str[position];
 
-        if (current_char == '\0' || current_char == '\n') 
+        if (current_char == '\0') 
+        {
+            break;
+        }
+
+        if (current_char == '\n') 
         {
             break;
         }
@@ -204,7 +242,8 @@ int oct_to_int(char str[])
             value = value * 8;
             value = value + (current_char - '0');
             position++;
-        } else 
+        } 
+        else 
         {
             printf(RED "Invalid input, will default to 0\n" RESET_COLOR);
             valid_input = false;
