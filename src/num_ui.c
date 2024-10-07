@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "convert_num.h"
+#include "convert_num2.h"
 #include "colors.h"
 
 #define MAX_INPUT 100

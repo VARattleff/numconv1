@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "convert_num.h"
+#include "convert_num2.h"
 
 void handle_test_dec_to_int();
 void handle_test_bin_to_int();
